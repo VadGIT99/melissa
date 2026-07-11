@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melissa Photographie</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+
+        /* ===== Reset et variables ===== */
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #c9a875;
+            --light: #f5f4f2;
+            --dark: #0d0d0d;
+            --accent: #c9a875;
+            --text-muted: #d6d6d6;
+            --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-title: 'Playfair Display', 'Georgia', serif;
+            --font-body: 'Poppins', 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        #bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            filter: brightness(0.65);
+        }
+
+        #bg-video::after {
+            content: '';
+        }
+
+        /* Overlay sombre permanent sur la vidéo pour meilleure lisibilité */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.5) 100%);
+            z-index: -1;
+        }
+
+        /* ===== Header ===== */
+        header {
+            background-color: transparent;
+            color: white;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            width: 100%;
+            height: 110px;
+            z-index: 100;
+            top: 0;
+            position: sticky;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        header.scrolled {
+            background-color: rgba(10, 10, 10, 0.85) !important;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        header h1 {
+            font-family: var(--font-title);
+            font-size: 2.6rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+        }
+
+        /* ===== Navigation ===== */
+        nav {
+            background-color: transparent;
+            padding: 0.8rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            position: sticky;
+            top: 110px;
+            z-index: 99;
+            transition: background-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        nav.scrolled {
+            background-color: rgba(10, 10, 10, 0.85) !important;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.25);
+            backdrop-filter: blur(10px);
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 0.3rem;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            position: relative;
+            transition: color var(--transition);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: var(--accent);
+            transition: width var(--transition);
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* ===== Hero / cellule ===== */
+        .cellule {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 85vh;
+            width: 100%;
+        }
+
+        /* ===== Main Content ===== */
+        main {
+            padding: 4rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        section {
+            width: 100%;
+        }
+
+        /* Titres de section génériques */
+        .section-title {
+            text-align: center;
+            font-family: var(--font-title);
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 2.5rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+
+      
+        /* ===== Featured Image ===== */
+        .featured {
+            width: 100%;
+            max-width: 1200px;
+            margin: 2rem auto 3rem;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .featured img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .featured:hover img {
+            transform: scale(1.06);
+        }
+
+        .featured .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+            color: white;
+            padding: 2.5rem 2rem 1.5rem;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .featured:hover .caption {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .featured .caption h3 {
+            font-family: var(--font-title);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        .featured .caption p {
+            font-family: var(--font-body);
+            font-weight: 300;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+        }
+
+        /* ===== About Section ===== */
+        .about {
+            text-align: center;
+            margin: 3rem 0 0;
+            background-color: rgba(10, 10, 10, 0.75);
+            width: 100%;
+            padding: 4rem 1.5rem;
+            border-radius: 8px;
+            backdrop-filter: blur(4px);
+        }
+
+        .about h2 {
+            font-family: var(--font-title);
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--light);
+            margin-bottom: 2rem;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .about h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background-color: var(--accent);
+        }
+
+        .about p {
+            font-family: var(--font-body);
+            font-weight: 300;
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 650px;
+            margin: 0 auto 0.8rem;
+            line-height: 1.9;
+            letter-spacing: 0.3px;
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 1.5rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+
+        footer p {
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .social-icons a {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-decoration: none;
+            padding: 0.6rem 1.2rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 30px;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        /* ===== Responsive ===== */
+        @media (min-width: 700px) {
+            .prestations {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.8rem;
+                letter-spacing: 1px;
+            }
+
+            nav {
+                gap: 1.2rem;
+                flex-wrap: wrap;
+            }
+
+            nav a {
+                font-size: 0.8rem;
+            }
+
+            .featured img {
+                height: 320px;
+            }
+
+            .section-title,
+            #Galerie > h2,
+            .about h2 {
+                font-size: 1.7rem;
+            }
+
+            .prestations img {
+                height: 200px;
+            }
+        }
+
+        /* ===== Animations ===== */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Mélissa Photographie</h1>
+    </header>
+
+    <video autoplay muted loop playsinline id="bg-video">
+        <source src="C:\Users\Reynet\Documents\Site Melissa\videos\video1.mp4" type="video/mp4">
+    </video>
+
+    <div class="cellule"></div>
+
+    <nav>
+        <a href="#about">À propos</a>
+        <a href="C:\Users\Reynet\Documents\Site Melissa\prestations.html">Prestations</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <main>
+        <section id="featured">
+            <div class="featured">
+                <img src="C:\Users\Reynet\Documents\Site Melissa\images\img2.jpg" alt="Image en vedette">
+                <div class="caption">
+                    <h3>Photos personnalisées</h3>
+                    <p>À l'écoute de vos besoins</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <h2>À propos</h2>
+            <p>Passionnée de photographie depuis plus de 10 ans,</p>
+            <p>je capture les moments qui comptent.</p>
+            <p>Spécialisée dans les portraits et les paysages, je cherche toujours à trouver la lumière parfaite.</p>
+        </section>
+    </main>
+
+    <footer id="contact">
+        <p>© 2026 Mélissa Photographie</p>
+        <p>Contactez-moi : <a href="melissa-photographie@gmail.com">contact@melissa-photographie.com</a></p>
+        <div class="social-icons">
+            <a href="#">Instagram</a>
+            <a href="#">Facebook</a>
+            <a href="#">Twitter</a>
+        </div>
+    </footer>
+
+    <!-- SCRIPT -->
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+        const header = document.querySelector("header");
+        const nav = document.querySelector("nav");
+
+        window.addEventListener("scroll", () => {
+            const headerBottom = header.getBoundingClientRect().bottom;
+            const navTop = nav.getBoundingClientRect().top;
+
+            if (navTop <= headerBottom) {
+                header.classList.add("scrolled");
+                nav.classList.add("scrolled");
+            } else {
+                header.classList.remove("scrolled");
+                nav.classList.remove("scrolled");
+            }
+        });
+
+    });
+    </script>
+
+</body>
+</html>
