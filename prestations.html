@@ -33,6 +33,17 @@
         }
         ::selection { background: var(--accent); color: #fff; }
 
+         #bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            filter: brightness(1);
+        }
+
         /* ── HEADER ── */
         header {
             background-color: transparent;
@@ -115,7 +126,7 @@
             padding: 4rem 2rem 3rem;
             background:
                 radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,117,0.08) 0%, transparent 70%),
-                var(--dark);
+                linear-gradient(180deg, rgba(10, 10, 10, 0.268) 0%, rgba(10, 10, 10, 0.597) 100%);
             overflow: hidden;
         }
         .page-hero::before {
@@ -168,9 +179,12 @@
             margin-bottom: 1rem;
             border: 1px solid var(--card-border);
             border-radius: 6px;
-            background: var(--card-bg);
             overflow: hidden;
             transition: border-color var(--transition), box-shadow var(--transition);
+            background:
+                radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,117,0.08) 0%, transparent 70%),
+                linear-gradient(180deg, rgba(10, 10, 10, 0.268) 0%, rgba(10, 10, 10, 0.837) 100%);
+            overflow: hidden;
         }
         .accordion-item:hover,
         .accordion-item:focus-within {
@@ -196,6 +210,10 @@
             text-align: left;
             transition: color var(--transition);
             outline: none;
+             background:
+                radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,117,0.08) 0%, transparent 70%),
+                linear-gradient(180deg, rgba(10, 10, 10, 0.268) 0%, rgba(10, 10, 10, 0.597) 100%);
+            overflow: hidden;
         }
         .accordion-trigger:focus-visible {
             background: rgba(201,168,117,0.05);
@@ -349,10 +367,14 @@
 
     <header><h1>Mélissa Photographie</h1></header>
 
+     <video autoplay muted loop playsinline id="bg-video">
+        <source src="https://vadgit99.github.io/melissa/videos/video2.mp4" type="video/mp4">
+    </video>
+
     <nav>
-        <a href="index.html">Accueil</a>
+        <a href="https://vadgit99.github.io/melissa/index.html">Accueil</a>
         <a href="prestations.html" class="active">Prestations</a>
-        <a href="file:///C:/Users/Reynet/Documents/Site%20Melissa/prestations.html#contact">Contact</a>
+        <a href="https://vadgit99.github.io/melissa/prestations.html#contact">Contact</a>
     </nav>
 
     <!-- Page hero -->
