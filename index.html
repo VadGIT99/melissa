@@ -51,14 +51,9 @@
             height: 100%;
             object-fit: cover;
             z-index: -2;
-            filter: brightness(0.65);
+            filter: brightness(1);
         }
 
-        #bg-video::after {
-            content: '';
-        }
-
-        /* Overlay sombre permanent sur la vidéo pour meilleure lisibilité */
         body::before {
             content: '';
             position: fixed;
@@ -159,6 +154,37 @@
             align-items: center;
             height: 85vh;
             width: 100%;
+            position: relative;
+        }
+
+        /* ===== Flèche de scroll ===== */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            width: 26px;
+            height: 26px;
+            border-left: 2px solid rgba(255, 255, 255, 0.75);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.75);
+            transform: translateX(-50%) rotate(-45deg);
+            cursor: pointer;
+            animation: bounce 2s infinite;
+            transition: opacity 0.4s ease;
+            z-index: 10;
+        }
+
+        .scroll-indicator.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) rotate(-45deg) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) rotate(-45deg) translateY(10px);
+            }
         }
 
         /* ===== Main Content ===== */
@@ -175,7 +201,6 @@
             width: 100%;
         }
 
-        /* Titres de section génériques */
         .section-title {
             text-align: center;
             font-family: var(--font-title);
@@ -198,7 +223,6 @@
             background-color: var(--accent);
         }
 
-      
         /* ===== Featured Image ===== */
         .featured {
             width: 100%;
@@ -396,14 +420,16 @@
     </header>
 
     <video autoplay muted loop playsinline id="bg-video">
-        <source src="C:\Users\Reynet\Documents\Site Melissa\videos\video1.mp4" type="video/mp4">
+        <source src="https://vadgit99.github.io/melissa/videos/video2.mp4" type="video/mp4">
     </video>
 
-    <div class="cellule"></div>
+    <div class="cellule">
+        <div class="scroll-indicator" id="scrollIndicator"></div>
+    </div>
 
     <nav>
         <a href="#about">À propos</a>
-        <a href="C:\Users\Reynet\Documents\Site Melissa\prestations.html">Prestations</a>
+        <a href="https://vadgit99.github.io/melissa/prestations.html">Prestations</a>
         <a href="#contact">Contact</a>
     </nav>
 
@@ -442,6 +468,7 @@
 
         const header = document.querySelector("header");
         const nav = document.querySelector("nav");
+        const scrollIndicator = document.getElementById("scrollIndicator");
 
         window.addEventListener("scroll", () => {
             const headerBottom = header.getBoundingClientRect().bottom;
@@ -454,6 +481,16 @@
                 header.classList.remove("scrolled");
                 nav.classList.remove("scrolled");
             }
+
+            if (window.scrollY > 50) {
+                scrollIndicator.classList.add("hidden");
+            } else {
+                scrollIndicator.classList.remove("hidden");
+            }
+        });
+
+        scrollIndicator.addEventListener("click", () => {
+            document.querySelector("#featured").scrollIntoView({ behavior: "smooth" });
         });
 
     });
