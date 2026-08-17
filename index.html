@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Melissa Photographie</title>
+    <title>AKILA</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
 
@@ -289,6 +289,15 @@
         .gallery-item img {
             width: 100%;
             height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.6s ease;
+            filter: brightness(0.95);
+        }
+
+        /*CSS POUR IMAGES SERVICES :::::::::::::::::::::::::::::::::::::::::::::::::*/
+        .service-card img {
+            width: 70%;
+            height: 50%;
             object-fit: cover;
             transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.6s ease;
             filter: brightness(0.95);
@@ -668,13 +677,62 @@
             }
         }
 
+/* MENU DEROULANT */
+.service-card {
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+}
+
+.more-info-btn {
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.more-info-btn:hover {
+    background-color: var(--dark);
+}
+
+.more-info-content {
+    text-align: left;
+    display: none;
+    margin-top: 10px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    border-left: 4px solid #4a6fa5;
+}
+
+.more-info-content.active {
+    display: block;
+}
+
+.more-info-content ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.more-info-content li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
     </style>
 </head>
 <body>
 
     <!-- ===== Header ===== -->
     <header id="header">
-        <div class="logo">Mélissa Photographie</div>
+        <div class="logo">AKILA</div>
         <nav id="nav">
             <a href="#portfolio">Portfolio</a>
             <a href="#about">À propos</a>
@@ -691,11 +749,8 @@
     <!-- ===== Hero / Vidéo ===== -->
     <section class="hero">
         <div class="cellule">
-            <video id="bg-video" autoplay muted loop playsinline poster="">
-                <source src="https://vadgit99.github.io/melissa/vidéos/video2.mp4" type="video/mp4">
-            </video>
             <div class="contenu">
-                <h1 class="hero-title">Mélissa Photographie</h1>
+                <h1 class="hero-title">AKILA</h1>
                 <p class="hero-subtitle">Capturer les moments précieux</p>
             </div>
             <div class="scroll-indicator" id="scrollIndicator" role="button" aria-label="Défiler vers le bas" tabindex="0"></div>
@@ -708,81 +763,96 @@
             <h2 class="section-title">Portfolio</h2>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80" alt="Mariage élégant" loading="lazy">
+                    <img src="cheval_couleur_cavalier.jpg" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1529634806980-85c3dd6d34b9?w=800&q=80" alt="Portrait en plein air" loading="lazy">
+                    <img src="chien_couleur.jpg" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=800&q=80" alt="Événement" loading="lazy">
+                    <img src="tracteur.jpg" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?w=800&q=80" alt="Couple" loading="lazy">
+                    <img src="chien_couleur_2.jpg" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?w=800&q=80" alt="Mariée" loading="lazy">
+                    <img src="cheval_couleur_cavalier_2.jpg" loading="lazy">
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1460978812857-470ed1c77af0?w=800&q=80" alt="Nature morte" loading="lazy">
+                    <img src="cheval_noir_blanc.jpg" loading="lazy">
                 </div>
             </div>
 
             <!-- Featured project -->
             <div class="featured">
-                <img class="featured-img" src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1600&q=80" alt="Projet en vedette">
+                <img class="featured-img" src="travail.jpg">
                 <div class="caption">
                     <h3>Projet en vedette</h3>
-                    <p>Editorial Mariage — 2024</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== À propos ===== -->
-    <section id="about">
-        <div class="container">
-            <h2 class="section-title">À propos</h2>
-            <div class="about">
-                <img class="about-photo" src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=600&q=80" alt="Mélissa - Photographe">
-                <div class="about-content">
-                    <h2>Mélissa Canu</h2>
-                    <p>
-                        Passionnée par l'art de capturer l'émotion et la beauté fugace, 
-                        je me suis spécialisée dans la photographie de mariage et de portrait depuis plus de sept ans. 
-                        Mon approche naturelle et authentique vous garantit des images qui racontent votre histoire avec sincérité. 
-                        Chaque séance est une collaboration bienveillante pour immortaliser vos instants précieux.
-                    </p>
+                    <p>Photographie entreprise</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ===== Services ===== -->
-    <section id="services">
-        <div class="container">
-            <h2 class="section-title">Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <span class="service-icon">💍</span>
-                    <h3>Mariage</h3>
-                    <p>Couverture complète de votre journée, de la préparation jusqu'à la soirée.</p>
-                    <span class="service-price">À partir de 1 800 €</span>
+<section id="services">
+    <div class="container">
+        <h2 class="section-title">Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <img src="chien_couleur.jpg">
+                <h3>Particulier</h3>
+                <p>Blablabla</p>
+                <button class="more-info-btn">En savoir plus</button>
+                <div class="more-info-content">
+                    <ul>
+                        <li>Portrait individuel</li>
+                        <li>Portrait couple</li>
+                        <li>Portrait grossesse</li>
+                        <li>Portrait famille</li>
+                    </ul>
                 </div>
-                <div class="service-card">
-                    <span class="service-icon">📸</span>
-                    <h3>Portrait</h3>
-                    <p>Séance en extérieur ou en studio pour immortaliser votre essence.</p>
-                    <span class="service-price">À partir de 350 €</span>
+            </div>
+            <div class="service-card">
+                <img src="tracteur.jpg">
+                <h3>Entreprise</h3>
+                <p>Tout événement professionnel</p>
+                <button class="more-info-btn">En savoir plus</button>
+                <div class="more-info-content">
+                    <ul>
+                        <li>Evenement corporate</li>
+                        <li>Evenement blablabla</li>
+                    </ul>
                 </div>
-                <div class="service-card">
-                    <span class="service-icon">🎉</span>
-                    <h3>Événement</h3>
-                    <p>Anniversaires, baptêmes, corporate — chaque moment compte.</p>
-                    <span class="service-price">À partir de 600 €</span>
+            </div>
+            <div class="service-card">
+                <img src="cheval_noir_blanc.jpg">
+                <h3>Immobilier</h3>
+                <p>Prise d'images photo/vidéo de vos biens</p>
+                <button class="more-info-btn">En savoir plus</button>
+                <div class="more-info-content">
+                    <ul>
+                        <li>Visite virtuelle 360° de la propriété (avant/après)</li>
+                        <li>Vidéo drone pour les extérieurs</li>
+                        <li>Conseils pour mettre en valeur votre bien</li>
+                    </ul>
+                </div>
+            </div>
+             <div class="service-card">
+                <img src="cheval_noir_blanc.jpg">
+                <h3>Sportif</h3>
+                <p>Paratgez votre passion</p>
+                <button class="more-info-btn">En savoir plus</button>
+                <div class="more-info-content">
+                    <ul>
+                        <li>Auto/Moto</li>
+                        <li>Sports d'extérieurs</li>
+                        <li>Tout projet sur demande</li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- ===== Contact ===== -->
     <section id="contact">
@@ -793,14 +863,14 @@
                     Vous avez un projet en tête ?<br>
                     Parlons ensemble de vos rêves et créons ensemble des souvenirs inoubliables.<br>
                 </p>
-                <a href="mailto:melissacanuphoto@gmail.com" class="cta-btn">contacter</a>
+                <a href="mailto:melissacanuphoto@gmail.com" class="cta-btn">akila.media04@gmail.com</a>
             </div>
         </div>
     </section>
 
     <!-- ===== Footer ===== -->
     <footer>
-        <p>&copy; 2024 Mélissa Photographie — Tous droits réservés.</p>
+        <p>&copy; 2026 AKILA — Tous droits réservés.</p>
         <div class="social-icons">
             <a href="#" aria-label="Instagram">📷</a>
             <a href="#" aria-label="Facebook">📘</a>
@@ -889,5 +959,23 @@
     </script>
 
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496" integrity="sha512-ZE9pZaUXND66v380QUtch/5sE9tPFh2zg45pR2PB0CVkCtOREv2AJKkSidISWkysEuQ0EH8faUU5du78bx87UQ==" data-cf-beacon='{"version":"2024.11.0","token":"8607d2a720d14b038279025b2b5a82e5","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // On ajoute un petit effet "clic" pour chaque bouton
+    document.querySelectorAll('.more-info-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const content = this.nextElementSibling;
+            content.classList.toggle('active');
+
+            // Change le texte du bouton selon l'état
+            if (content.classList.contains('active')) {
+                this.textContent = "Masquer";
+            } else {
+                this.textContent = "En savoir plus";
+            }
+        });
+    });
+});
+</script>
 </body>
 </html>
